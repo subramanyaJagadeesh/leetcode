@@ -19,53 +19,15 @@ public class RemoveDuplicatedInSortedArray {
     //    assert nums[i] == expectedNums[i];
     //}
     //If all assertions pass, then your solution will be accepted.
-    public void heapify(int[] nums, int len, int lIndex){
-        int largest = lIndex;
-        int left = largest * 2 + 1;
-        int right  = largest * 2 + 2;
-
-        if(right < len && nums[right] > nums[largest])
-            largest = right;
-
-        if(left < len && nums[left] > nums[largest])
-            largest = left;
-
-        if(largest != lIndex){
-            int num = nums[lIndex];
-            nums[lIndex] = nums[largest];
-            nums[largest] = num;
-
-            heapify(nums, len, largest);
-        }
-
-    }
-
-    public void sort(int[] nums) {
-        for(int i = nums.length/2 - 1 ; i >= 0; i--)
-            heapify(nums, nums.length, i);
-
-        for(int i = nums.length-1; i > 0; i--){
-            int num = nums[0];
-            nums[0] = nums[i];
-            nums[i] = num;
-
-            heapify(nums, i, 0);
-        }
-    }
     public int removeDuplicates(int[] nums) {
-        int duplicateNumber = nums[0];
-        int k = nums.length;
-        int i = 1;
-        while(i<=nums.length-1){
-            if(nums[i] == duplicateNumber){
-                k--;
-                nums[i] = 101;
-            } else {
-                duplicateNumber = nums[i];
+        int k = 1, i = 1;
+        while(i<nums.length){
+            if(nums[i]!=nums[i-1]){
+                nums[k] = nums[i];
+                k++;
             }
             i++;
         }
-        sort(nums);
         return k;
     }
 }

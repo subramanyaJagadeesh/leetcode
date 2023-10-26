@@ -3,27 +3,26 @@ public class LongestCommonPrefix {
     //
     //If there is no common prefix, return an empty string "".
     public String longestCommonPrefix(String[] strs) {
-        if(strs.length == 1){
-            return strs[0];
-        }
-        String start = strs[0];
-        String longest = new String(start);
-        for(int i = 1; i < strs.length; i++){
-            int length;
-            String curr = strs[i];
-            start = longest;
-            longest = "";
-            if(start.length() < curr.length())
-                length = start.length();
-            else
-                length = curr.length();
-            for(int j = 0; j < length; j++) {
-                if(start.charAt(j) == curr.charAt(j)){
-                    longest+=start.charAt(j);
-                } else {
-                    break;
-                }
+        //take first string as longest
+        String longest = strs[0];
+        int i = 1;
+        //loop over all strings
+        while(i < strs.length) {
+            int j = 0;
+            //there is no common
+            if(longest.equals("")){
+                return "";
             }
+            while(j < Math.min(longest.length(), strs[i].length())){
+                //increment index if chars match
+                if(longest.charAt(j) == strs[i].charAt(j)){
+                    j++;
+                    continue;
+                }
+                break;
+            }
+            longest = longest.substring(0, j);
+            i++;
         }
         return longest;
     }

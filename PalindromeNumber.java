@@ -1,22 +1,17 @@
 public class PalindromeNumber {
     //Given an integer x, return true if x is a palindrome, and false otherwise.
     public boolean isPalindrome(int x) {
-        if(x < 0) {
+        int numRev = 0;
+        int newX = x;
+        if(x < 0)
             return false;
+        while(newX > 0){
+            numRev = 10 * numRev + newX % 10;
+            newX = newX/10;
         }
-        if (x < 10) {
+        if(numRev == x)
             return true;
-        }
-        String s = Integer.toString(x);
-        int i = 0;
-        int j = s.length() -1;
-        while(i < j) {
-            if(s.charAt(i) != s.charAt(j)){
-                return false;
-            }
-            i++;
-            j--;
-        }
-        return true;
+        else
+            return false;
     }
 }
